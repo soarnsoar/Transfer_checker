@@ -33,7 +33,7 @@ def get_size(ADDRESS,PATH):
         for line in sampleinfo.split('\n'):
             if 'Size' in line:
                 Size=line.replace('Size:','').strip()
-    except subprocess.CalledProcessError as e::
+    except subprocess.CalledProcessError as e:
         Size='-1'
 
 
@@ -48,8 +48,10 @@ def get_size(ADDRESS,PATH):
 def make_fail_list(TARGETDIR,OUTTXT):    
     print "TARGETDIR="+TARGETDIR
     print "OUTTXT="+OUTTXT
-    fw=open(OUTTXT,'w')
-    fw.write("#START#")
+    SAVEDIR='list_files/'
+    os.system('mkdir -p '+SAVEDIR)
+    fw=open(SAVEDIR+'/'+OUTTXT,'w')
+    #fw.write("#START#")
     #TARGETDIR='/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/'
     LIST=get_list(TARGETDIR)
     #pool=multiprocessing.Pool(processes=10)
@@ -89,7 +91,7 @@ TARGETDIR=args.target
 OUTTXT=args.output
 make_fail_list(TARGETDIR,OUTTXT)
 os.system(' echo '+TARGETDIR+' | mail -s JOB_FINISHED soarnsoar@gmail.com')
-
+print "DONE."
 
 
 #end_time=time.time()

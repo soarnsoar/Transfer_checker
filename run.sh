@@ -13,8 +13,11 @@ SUBDIRS+=(Apr2017_Run2016F_RemAOD)
 SUBDIRS+=(Apr2017_Run2016G_RemAOD)
 SUBDIRS+=(Apr2017_Run2016H_RemAOD)
 
+
+
+mkdir -p logs/
 for subdir in ${SUBDIRS[@]};do
-    python make_list.py --target "${BASEDIR}/${subdir}/" --output "${subdir}.txt" &> log_${subdir}.txt&
+    python make_list.py --target "${BASEDIR}/${subdir}/" --output "${subdir}.txt" &> logs/log_${subdir}.txt&
     continue
 done
 
@@ -23,6 +26,7 @@ done
 ##MC##
 BASEDIR='/eos/cms/store/group/phys_higgs/cmshww/amassiro/Full2016_Apr17/Apr2017_summer16/'
 SUBDIRS=($(ls -d ${BASEDIR}/*/))
+
 for subdir in ${SUBDIRS[@]};do
     #echo ${subdir}
     #echo "@"
@@ -31,7 +35,7 @@ for subdir in ${SUBDIRS[@]};do
     subdir=${subdir#"/"}
     subdir=${subdir%"/"}
     #echo ${subdir}
-
-    python make_list.py --target "${BASEDIR}/${subdir}" --output "${subdir}.txt" &> log_${subdir}.txt&
+    
+    python make_list.py --target "${BASEDIR}/${subdir}" --output "${subdir}.txt" &> logs/log_${subdir}.txt&
 done
     
